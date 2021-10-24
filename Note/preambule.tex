@@ -7,6 +7,7 @@
 \usepackage[english,russian]{babel}
 \usepackage{fontspec}
 \setmainfont{Times New Roman}
+\usepackage{float}
 
 % ГОСТовские настройки для полей и абзацев
 \usepackage[left=30mm,right=10mm,top=20mm,bottom=20mm]{geometry}
@@ -44,9 +45,16 @@
 \titlespacing\subsubsection{\parindent}{\parskip}{\parskip}
 
 % Работа с изображениями и таблицами; переопределение названий по ГОСТу
+\usepackage{float}
+\usepackage{setspace}
+\onehalfspacing % Полуторный интервал
+\frenchspacing
 \usepackage{caption}
-\captionsetup[figure]{name={Рисунок},labelsep=endash}
-\captionsetup[table]{singlelinecheck=false, labelsep=endash}
+\usepackage{indentfirst} % Красная строка
+\usepackage{titlesec}
+\titleformat{\chapter}{\LARGE\bfseries}{\thechapter}{20pt}{\LARGE\bfseries}
+\titleformat{\section}{\Large\bfseries}{\thesection}{20pt}{\Large\bfseries}
+\usepackage{listings}
 
 \usepackage{graphicx}
 \usepackage{slashbox} % Диагональное разделение первой ячейки в таблицах
