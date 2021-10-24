@@ -4,13 +4,19 @@
 \usepackage{extsizes} % Для добавления в параметры класса документа 14pt
 
 % Для работы с несколькими языками и шрифтом Times New Roman по-умолчанию
+\usepackage{cmap} % Улучшенный поиск русских слов в полученном pdf-файле
 \usepackage[english,russian]{babel}
+\usepackage[utf8]{inputenc} % Кодировка utf8
 \usepackage{fontspec}
 \setmainfont{Times New Roman}
 \usepackage{float}
 
 % ГОСТовские настройки для полей и абзацев
-\usepackage[left=30mm,right=10mm,top=20mm,bottom=20mm]{geometry}
+\usepackage{geometry}
+\geometry{left=30mm}
+\geometry{right=15mm}
+\geometry{top=20mm}
+\geometry{bottom=20mm}
 \usepackage{misccorr}
 \usepackage{indentfirst}
 \usepackage{enumitem}
