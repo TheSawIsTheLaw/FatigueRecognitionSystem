@@ -59,8 +59,11 @@
 \usepackage{indentfirst} % Красная строка
 \usepackage{titlesec}
 \titleformat{\chapter}{\LARGE\bfseries}{\thechapter}{20pt}{\LARGE\bfseries}
-\titleformat{\section}{\Large\bfseries}{\thesection}{20pt}{\Large\bfseries}
+\titleformat{\section}{\centering\Large\bfseries}{\thesection.\quad}{20pt}{\Large\bfseries}
 \usepackage{listings}
+
+% Выравнивание "где" по ГОСТу для формул
+\usepackage{eqexpl}
 
 \usepackage{graphicx}
 \usepackage{slashbox} % Диагональное разделение первой ячейки в таблицах
