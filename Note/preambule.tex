@@ -14,13 +14,13 @@
 % ГОСТовские настройки для полей и абзацев
 \usepackage{geometry}
 \geometry{left=30mm}
-\geometry{right=15mm}
+\geometry{right=10mm}
 \geometry{top=20mm}
 \geometry{bottom=20mm}
 \usepackage{misccorr}
 \usepackage{indentfirst}
 \usepackage{enumitem}
-\setlength{\parindent}{1.25cm}
+\setlength{\parindent}{1.5cm}
 %\setlength{\parskip}{1em} % поменять
 %\linespread{1.3}
 \renewcommand{\baselinestretch}{1.5}
@@ -70,6 +70,10 @@
 
 % Цвета для гиперссылок и листингов
 \usepackage{color}
+
+% Для нормальной нумерации картинок, разделённой по section'ам
+\usepackage{chngcntr}
+\counterwithin{figure}{section}
 
 % Гиперссылки \toc с кликабельностью
 \usepackage{hyperref}
