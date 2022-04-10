@@ -1,9 +1,13 @@
 import java.awt.EventQueue
+import java.io.File
 import javax.swing.*
 
 class BigBrotherWindow(title: String) : JFrame() {
 
     var currentUsername: String? = null
+
+    var mouseLogger: MouseLogger? = null
+    var keyLogger: KeyLogger? = null
 
     init {
         createUI(title)
@@ -11,9 +15,16 @@ class BigBrotherWindow(title: String) : JFrame() {
 
     private fun getInputAndStartWork(textField: JTextField) {
         currentUsername = textField.text.trim()
-        MouseLogger(currentUsername!!)
 
+        File("${System.getProperty("user.dir")}\\data").mkdir()
 
+        mouseLogger = MouseLogger(currentUsername!!)
+        keyLogger = KeyLogger(currentUsername!!)
+    }
+
+    private fun stopWork() {
+        mouseLogger?.stop()
+        keyLogger?.stop()
     }
 
     private fun createUI(title: String) {
@@ -21,13 +32,32 @@ class BigBrotherWindow(title: String) : JFrame() {
         setTitle(title)
 
         val input = JTextField("Фамилия_Имя_(Ваш факультет)х-хх")
-        val goButton = JButton("Готово")
 
+        val goButton = JButton("Начать слежку")
         goButton.addActionListener {
             getInputAndStartWork(input)
+            JOptionPane.showMessageDialog(
+                this,
+                "Наблюдаю за жизнедеятельностью",
+                "Изменение статуса",
+                JOptionPane.INFORMATION_MESSAGE
+            )
+            setTitle("BB (активен)")
         }
 
-        createLayout(input, goButton)
+        val stopButton = JButton("Остановить слежку")
+        stopButton.addActionListener {
+            stopWork()
+            JOptionPane.showMessageDialog(
+                this,
+                "Закончил наблюдение за жизнедеятельностью",
+                "Изменение статуса",
+                JOptionPane.INFORMATION_MESSAGE
+            )
+            setTitle("BB (неактивен)")
+        }
+
+        createLayout(input, goButton, stopButton)
 
         defaultCloseOperation = JFrame.EXIT_ON_CLOSE
         setSize(400, 200)
@@ -35,22 +65,23 @@ class BigBrotherWindow(title: String) : JFrame() {
     }
 
 
-    private fun createLayout(vararg arg: JComponent) {
+    private fun createLayout(vararg components: JComponent) {
 
         val gl = GroupLayout(contentPane)
         contentPane.layout = gl
 
         gl.autoCreateContainerGaps = true
 
-        gl.setHorizontalGroup(gl.createSequentialGroup()
-                .addComponent(arg[0])
-                .addComponent(arg[1])
-        )
+        val horizontalGroup = gl.createParallelGroup()
+        components.forEach { horizontalGroup.addComponent(it) }
 
-        gl.setVerticalGroup(gl.createSequentialGroup()
-                .addComponent(arg[0])
-                .addComponent(arg[1])
-        )
+        gl.setHorizontalGroup(horizontalGroup)
+
+
+        val verticalGroup = gl.createSequentialGroup()
+        components.forEach { verticalGroup.addComponent(it) }
+
+        gl.setVerticalGroup(verticalGroup)
 
         pack()
     }
@@ -58,7 +89,7 @@ class BigBrotherWindow(title: String) : JFrame() {
 
 private fun createAndShowGUI() {
 
-    val frame = BigBrotherWindow("Большой брат следит за тобой")
+    val frame = BigBrotherWindow("BB (Неактивен)")
     frame.isVisible = true
 }
 
