@@ -1,3 +1,5 @@
+package loggers.mouseLogger
+
 import org.jnativehook.GlobalScreen
 import org.jnativehook.NativeHookException
 import org.jnativehook.mouse.NativeMouseEvent

@@ -1,3 +1,9 @@
+package bigBrother
+
+import loggers.keyLogger.KeyLogger
+import loggers.mouseLogger.MouseLogger
+import loggers.reactionTest.ReactionLogger
+import loggers.reactionTest.ReactionTestWindow
 import java.awt.EventQueue
 import java.io.File
 import javax.swing.*
@@ -8,6 +14,7 @@ class BigBrotherWindow(title: String) : JFrame() {
 
     var mouseLogger: MouseLogger? = null
     var keyLogger: KeyLogger? = null
+    var reactionLogger: ReactionLogger? = null
 
     init {
         createUI(title)
@@ -57,7 +64,13 @@ class BigBrotherWindow(title: String) : JFrame() {
             setTitle("BB (неактивен)")
         }
 
-        createLayout(input, goButton, stopButton)
+        val checkReactionButton = JButton("Проверить реакцию")
+        checkReactionButton.addActionListener {
+            val frame = ReactionTestWindow("Тест реакции")
+            frame.isVisible = true
+        }
+
+        createLayout(input, goButton, stopButton, checkReactionButton)
 
         defaultCloseOperation = JFrame.EXIT_ON_CLOSE
         setSize(400, 200)

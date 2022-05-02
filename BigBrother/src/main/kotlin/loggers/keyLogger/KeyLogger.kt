@@ -1,3 +1,5 @@
+package loggers.keyLogger
+
 import org.jnativehook.GlobalScreen
 import org.jnativehook.NativeHookException
 import org.jnativehook.keyboard.NativeKeyEvent
