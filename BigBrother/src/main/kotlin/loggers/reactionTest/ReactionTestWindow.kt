@@ -1,19 +1,13 @@
 package loggers.reactionTest
 
+import random.BBRandom
+import window.Window
 import java.awt.Font
 import java.lang.Thread.sleep
-import java.util.*
 import javax.swing.*
 import kotlin.concurrent.thread
-import kotlin.system.measureTimeMillis
 
-class ReactionTestWindow(title: String) : JFrame() {
-
-    private val NUMBER_OF_TESTS = 10
-
-    private var numberOfPassed = 0
-
-    private val random = Random()
+class ReactionTestWindow(title: String, username: String) : Window() {
 
     @Volatile
     private var testButtonPressed = false
@@ -23,7 +17,13 @@ class ReactionTestWindow(title: String) : JFrame() {
 
     private var reactionsTotal = 0L
 
+    private var reactionLogger: ReactionLogger
+
     init {
+        reactionLogger = ReactionLogger(username)
+
+        reactionLogger.start()
+
         createUI(title)
     }
 
@@ -37,26 +37,31 @@ class ReactionTestWindow(title: String) : JFrame() {
             reactionTimestamp = System.currentTimeMillis()
             testButtonPressed = true
         }
+        testButton.isVisible = false
 
         val spacer = JLabel(" ")
         spacer.font = Font("Arial", Font.PLAIN, 50)
 
         val startButton = JButton("Начать тест")
         startButton.addActionListener {
-            testButton.isVisible = false
+            startButton.isVisible = false
             thread {
                 var startTime: Long
                 for (i in 0 until NUMBER_OF_TESTS) {
-                    sleep((3 + random.nextInt(8).toLong()) * 1000)
+                    sleep((3 + BBRandom.random.nextInt(8).toLong()) * 1000)
                     testButton.isVisible = true
                     startTime = System.currentTimeMillis()
                     while (!testButtonPressed) {
-                        sleep(300)
+                        sleep(20)
                     }
                     reactionsTotal += startTime - reactionTimestamp
                     testButton.isVisible = false
                     testButtonPressed = false
                 }
+
+                this.isVisible = false
+
+                reactionLogger.addRecord(reactionsTotal / NUMBER_OF_TESTS)
             }
         }
 
@@ -66,25 +71,7 @@ class ReactionTestWindow(title: String) : JFrame() {
         setLocationRelativeTo(null)
     }
 
-
-    private fun createLayout(vararg components: JComponent) {
-
-        val gl = GroupLayout(contentPane)
-        contentPane.layout = gl
-
-        gl.autoCreateContainerGaps = true
-
-        val horizontalGroup = gl.createParallelGroup()
-        components.forEach { horizontalGroup.addComponent(it) }
-
-        gl.setHorizontalGroup(horizontalGroup)
-
-
-        val verticalGroup = gl.createSequentialGroup()
-        components.forEach { verticalGroup.addComponent(it) }
-
-        gl.setVerticalGroup(verticalGroup)
-
-        pack()
+    companion object {
+        private const val NUMBER_OF_TESTS = 10
     }
 }

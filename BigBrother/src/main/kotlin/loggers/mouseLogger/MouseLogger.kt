@@ -15,8 +15,8 @@ class MouseLogger(username: String) : Logger, NativeMouseInputListener {
     private val mPathToFileForMoves = "${System.getProperty("user.dir")}\\data\\${username}_Mouse_Moves.txt"
     private val mPathToFileForClicks = "${System.getProperty("user.dir")}\\data\\${username}_Mouse_Clicks.txt"
 
-    private var mFileForMoves: File = File(mPathToFileForMoves)
-    private var mFileForClicks: File = File(mPathToFileForClicks)
+    private var mFileForMoves = File(mPathToFileForMoves)
+    private var mFileForClicks = File(mPathToFileForClicks)
 
     private fun setFiles() {
         if (!mFileForMoves.exists()) mFileForMoves.createNewFile()
@@ -28,6 +28,8 @@ class MouseLogger(username: String) : Logger, NativeMouseInputListener {
             GlobalScreen.registerNativeHook()
         } catch (ex: NativeHookException) {
             System.err.println("There was a problem registering the native hook.")
+            println(ex.message)
+            println("ДА БЛЯТь!!!!!")
             exitProcess(1)
         }
 
@@ -39,6 +41,7 @@ class MouseLogger(username: String) : Logger, NativeMouseInputListener {
 
     override fun stop() {
         GlobalScreen.removeNativeMouseListener(this)
+        // Causes System.exit(1) on Arch and Mint :)
         GlobalScreen.unregisterNativeHook()
     }
 

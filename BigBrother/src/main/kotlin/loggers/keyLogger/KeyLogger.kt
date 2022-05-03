@@ -14,7 +14,7 @@ class KeyLogger(username: String) : Logger, NativeKeyListener {
 
     private val mPathToFile = "${System.getProperty("user.dir")}\\data\\${username}_Keys.txt"
 
-    private var mFile: File = File(mPathToFile)
+    private var mFile = File(mPathToFile)
 
     private fun setFile() {
         if (!mFile.exists()) mFile.createNewFile()
@@ -35,6 +35,7 @@ class KeyLogger(username: String) : Logger, NativeKeyListener {
 
     override fun stop() {
         GlobalScreen.removeNativeKeyListener(this)
+        // Causes System.exit(1) on Arch and Mint :)
         GlobalScreen.unregisterNativeHook()
     }
 
