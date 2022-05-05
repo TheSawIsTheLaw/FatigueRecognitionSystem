@@ -28,8 +28,6 @@ class MouseLogger(username: String) : Logger, NativeMouseInputListener {
             GlobalScreen.registerNativeHook()
         } catch (ex: NativeHookException) {
             System.err.println("There was a problem registering the native hook.")
-            println(ex.message)
-            println("ДА БЛЯТь!!!!!")
             exitProcess(1)
         }
 
