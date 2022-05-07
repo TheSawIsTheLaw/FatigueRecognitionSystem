@@ -59,7 +59,8 @@ class MouseLogger(username: String) : Logger, NativeMouseInputListener {
     }
 
     override fun nativeMouseMoved(p0: NativeMouseEvent?) {
-        mFileForMoves.appendText("x=${p0!!.x}, y=${p0.y}, timestamp=${DateFormatter.dateFormat.format(Date())}\n")
+        mFileForMoves.appendText("x=${p0!!.x}, y=${p0.y}," +
+                " timestamp=${DateFormatter.dateFormat.format(Date())}\n")
     }
 
     override fun nativeMouseDragged(p0: NativeMouseEvent?) {
