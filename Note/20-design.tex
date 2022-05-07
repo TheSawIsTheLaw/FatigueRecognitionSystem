@@ -37,8 +37,8 @@
 
 Передвижения курсора мыши характеризуется тремя полями:
 \begin{itemize}[leftmargin=1.6\parindent]
-\item координата X положения, в котором находится курсор;
-\item координата Y положения, в котором находится курсор;
+\item координата X нового положения, в котором находится курсор;
+\item координата Y нового положения, в котором находится курсор;
 \item временная метка, включающая в себя дату совершенного действия, и время в формате ЧЧ:ММ:СС.ССС.
 \end{itemize}
 
@@ -54,7 +54,7 @@
 На рисунке \ref{fig:useCase} предоставлена диаграмма вариантов использования.
 \begin{figure}[H]
 	\centering
-	\includegraphics[width=\textwidth]{}
+	\includegraphics[width=\textwidth]{img/useCaseDiagram.pdf}
 	\caption{Диаграмма вариантов использования.}
 	\label{fig:useCase}
 \end{figure}
@@ -64,17 +64,28 @@
 
 \begin{figure}[H]
 	\centering
-	\includegraphics[width=\textwidth]{}
+	\includegraphics[width=\textwidth]{img/A0.pdf}
 	\caption{IDEF0-диаграмма уровня A0.}
 	\label{fig:idef:0}
 \end{figure}
 
 \begin{figure}[H]
 	\centering
-	\includegraphics[scale=0.3]{}
+	\includegraphics[scale=0.25]{img/A123.pdf}
 	\caption{IDEF0-диаграмма уровня A1-A3.}
 	\label{fig:idef:1}
 \end{figure}
+
+\subsection{Диаграмма ``сущность-связь'' в нотации Чена}
+На рисунке \ref{fig:erDiag} предоставлена диаграмма ``сущность-связь'' в нотации Чена.
+
+\begin{figure}[H]
+	\centering
+	\includegraphics[scale=0.28]{img/chenERDiagram.pdf}
+	\caption{Диаграмма ``сущность-связь'' в нотации Чена.}
+	\label{fig:erDiag}
+\end{figure}
+
 
 \subsection{Используемые методы исследования корреляции}
 Корреляционные методы позволяют решать задачи определения изменения зависимой переменной под влиянием одного или набора факторов, установки тесноты связи результативного признака с отдельным фактором, включенным в анализ. Также данные методы предоставляют возможность оценки общего объема вариации зависимой переменной и определения роли каждого фактора, а также проведения статистической оценки выборочных показателей корреляционной связи. \cite{correlInEco}
@@ -246,7 +257,7 @@ S_М=\sum_{i=1}^{m}{n_i\left(y_{ij}-y_{gg}\right)^2=\sum_{i=1}^{m}{n_i\widehat{\
 
 \begin{equation}
 \label{eq:sv}
-S_В=\sum_{i,J}{\left(\left(y_{ij}-y_{ig}\right)^2},
+S_В=\sum_{i,j}{\left(\left(y_{ij}-y_{ig}\right)^2\right)},
 \end{equation}
 \eqexplSetIntro{где}
 \begin{eqexpl}[15mm]
