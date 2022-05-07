@@ -11,7 +11,7 @@ open class Window: JFrame() {
 
         gl.autoCreateContainerGaps = true
 
-        val horizontalGroup = gl.createParallelGroup()
+        val horizontalGroup = gl.createParallelGroup(GroupLayout.Alignment.CENTER)
         components.forEach { horizontalGroup.addComponent(it) }
 
         gl.setHorizontalGroup(horizontalGroup)

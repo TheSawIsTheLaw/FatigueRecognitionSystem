@@ -37,7 +37,7 @@ class ReactionTestWindow(title: String, username: String) : Window() {
             reactionTimestamp = System.currentTimeMillis()
             testButtonPressed = true
         }
-        testButton.isVisible = false
+        testButton.isVisible = true
 
         val spacer = JLabel(" ")
         spacer.font = Font("Arial", Font.PLAIN, 50)
@@ -54,8 +54,8 @@ class ReactionTestWindow(title: String, username: String) : Window() {
                     while (!testButtonPressed) {
                         sleep(20)
                     }
-                    reactionsTotal += startTime - reactionTimestamp
-                    testButton.isVisible = false
+                    reactionsTotal += reactionTimestamp - startTime
+                            testButton.isVisible = false
                     testButtonPressed = false
                 }
 
@@ -65,9 +65,11 @@ class ReactionTestWindow(title: String, username: String) : Window() {
             }
         }
 
+
         createLayout(testButton, spacer, startButton)
 
-        setSize(400, 200)
+        testButton.isVisible = false
+
         setLocationRelativeTo(null)
     }
 

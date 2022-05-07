@@ -12,8 +12,8 @@ import kotlin.system.exitProcess
 
 class MouseLogger(username: String) : Logger, NativeMouseInputListener {
 
-    private val mPathToFileForMoves = "${System.getProperty("user.dir")}\\data\\${username}_Mouse_Moves.txt"
-    private val mPathToFileForClicks = "${System.getProperty("user.dir")}\\data\\${username}_Mouse_Clicks.txt"
+    private val mPathToFileForMoves = "${System.getProperty("user.dir")}/data/${username}_Mouse_Moves.txt"
+    private val mPathToFileForClicks = "${System.getProperty("user.dir")}/data/${username}_Mouse_Clicks.txt"
 
     private var mFileForMoves = File(mPathToFileForMoves)
     private var mFileForClicks = File(mPathToFileForClicks)

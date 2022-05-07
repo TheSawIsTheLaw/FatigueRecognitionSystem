@@ -5,6 +5,7 @@ import loggers.mouseLogger.MouseLogger
 import loggers.reactionTest.ReactionTestWindow
 import window.Window
 import java.io.File
+import java.lang.Exception
 import javax.swing.*
 
 class BigBrotherWindow(title: String) : Window() {
@@ -15,13 +16,18 @@ class BigBrotherWindow(title: String) : Window() {
     var keyLogger: KeyLogger? = null
 
     init {
+        try {
+            UIManager.setLookAndFeel(UIManager.getSystemLookAndFeelClassName())
+        } catch (ex: Exception) {
+        }
+
+        File("${System.getProperty("user.dir")}\\data").mkdir()
+
         createUI(title)
     }
 
     private fun getInputAndStartLoggingMoves(textField: JTextField) {
         currentUsername = textField.text.trim()
-
-        File("${System.getProperty("user.dir")}\\data").mkdir()
 
         mouseLogger = MouseLogger(currentUsername!!)
         keyLogger = KeyLogger(currentUsername!!)
@@ -40,6 +46,7 @@ class BigBrotherWindow(title: String) : Window() {
         setTitle(title)
 
         val input = JTextField("Фамилия_Имя_(Ваш факультет)х-хх")
+        input.horizontalAlignment = JTextField.CENTER
 
         val goButton = JButton("Начать слежку")
         goButton.addActionListener {

@@ -7,7 +7,7 @@ import java.util.*
 
 class ReactionLogger(username: String) : Logger {
 
-    private val mPathToFile = "${System.getProperty("user.dir")}\\data\\${username}_Reactions.txt"
+    private val mPathToFile = "${System.getProperty("user.dir")}/data/${username}_Reactions.txt"
 
     private val mFile = File(mPathToFile)
 
