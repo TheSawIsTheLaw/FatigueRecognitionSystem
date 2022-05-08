@@ -21,7 +21,7 @@ class BigBrotherWindow(title: String) : Window() {
         } catch (ex: Exception) {
         }
 
-        File("${System.getProperty("user.dir")}\\data").mkdir()
+        File("${System.getProperty("user.dir")}/data").mkdir()
 
         createUI(title)
     }
