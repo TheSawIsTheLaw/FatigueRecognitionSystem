@@ -3,9 +3,9 @@ package bbParser.models
 import dateFormat.DateFormatter
 
 class MouseClickModel(
-    val xCoord: Int,
-    val yCoord: Int,
-    val key: Int,
+    val mXCoordinate: Int,
+    val mYCoordinate: Int,
+    val mKey: Int,
     timestamp: String
 ): Model(DateFormatter.dateFormat.parse(timestamp)) {
 }

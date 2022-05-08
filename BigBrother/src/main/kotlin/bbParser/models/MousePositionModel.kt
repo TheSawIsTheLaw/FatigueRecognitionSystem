@@ -3,8 +3,8 @@ package bbParser.models
 import dateFormat.DateFormatter
 
 class MousePositionModel(
-    val xCoord: Int,
-    val yCoord: Int,
+    val mXCoordinate: Int,
+    val mYCoordinate: Int,
     timestamp: String
 ) : Model(DateFormatter.dateFormat.parse(timestamp)) {
 }
