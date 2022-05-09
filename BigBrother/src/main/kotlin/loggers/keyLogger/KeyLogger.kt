@@ -1,16 +1,16 @@
 package loggers.keyLogger
 
-import dateFormat.DateFormatter
 import loggers.Logger
 import org.jnativehook.GlobalScreen
 import org.jnativehook.NativeHookException
 import org.jnativehook.keyboard.NativeKeyEvent
 import org.jnativehook.keyboard.NativeKeyListener
 import java.io.File
-import java.util.*
 import kotlin.system.exitProcess
 
 class KeyLogger(username: String) : Logger, NativeKeyListener {
+
+    private var startTime = 0L
 
     private val mPathToFile = "${System.getProperty("user.dir")}/data/${username}_Keys.txt"
 
@@ -28,6 +28,8 @@ class KeyLogger(username: String) : Logger, NativeKeyListener {
             exitProcess(1)
         }
 
+        startTime = System.currentTimeMillis()
+
         setFile()
 
         GlobalScreen.addNativeKeyListener(this)
@@ -42,7 +44,7 @@ class KeyLogger(username: String) : Logger, NativeKeyListener {
     override fun nativeKeyPressed(e: NativeKeyEvent) {
         mFile.appendText(
             "key=${NativeKeyEvent.getKeyText(e.keyCode)}," +
-                    " timestamp=${DateFormatter.dateFormat.format(Date())}\n"
+                    " timestamp=${startTime + e.`when`}\n"
         )
     }
 

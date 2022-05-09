@@ -1,9 +1,7 @@
 package loggers.reactionTest
 
-import dateFormat.DateFormatter
 import loggers.Logger
 import java.io.File
-import java.util.*
 
 class ReactionLogger(username: String) : Logger {
 
@@ -22,7 +20,7 @@ class ReactionLogger(username: String) : Logger {
     fun addRecord(resultInMillis: Long) {
         mFile.appendText(
             "reaction_time=${resultInMillis}, " +
-                    "timestamp=${DateFormatter.dateFormat.format(Date())}\n"
+                    "timestamp=${System.currentTimeMillis()}\n"
         )
 
     }

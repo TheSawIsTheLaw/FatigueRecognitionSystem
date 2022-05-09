@@ -11,7 +11,7 @@ class MouseClicksBbParser : BbParser(
                 strValues[0].trim().removePrefix(Prefixes.X_COORDINATE).toInt(),
                 strValues[1].trim().removePrefix(Prefixes.Y_COORDINATE).toInt(),
                 strValues[2].trim().removePrefix(Prefixes.KEY).toInt(),
-                strValues[3].trim().removePrefix(Prefixes.TIMESTAMP)
+                strValues[3].trim().removePrefix(Prefixes.TIMESTAMP).toLong()
             )
         }
     }

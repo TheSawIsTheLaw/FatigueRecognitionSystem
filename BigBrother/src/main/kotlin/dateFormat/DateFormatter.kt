@@ -1,7 +1,8 @@
 package dateFormat
 
-import java.text.SimpleDateFormat
+import java.time.format.DateTimeFormatter
 
 object DateFormatter {
-    val dateFormat by lazy { SimpleDateFormat("dd/M/yyyy HH:mm:ss") }
+
+    val dateFormat by lazy { DateTimeFormatter.ofPattern("dd/M/yyyy HH:mm:ss.ms") }
 }

@@ -1,5 +1,6 @@
 package bbParser
 
+import bbConverter.KeysConverter
 import bbParser.parsers.KeysBbParser
 import bbParser.parsers.MouseClicksBbParser
 import bbParser.parsers.MouseMovesBbParser
@@ -7,11 +8,20 @@ import bbParser.parsers.ReactionsBbParser
 
 fun main() {
     println("Keys")
-    println(KeysBbParser().parseFile("${System.getProperty("user.dir")}/dataExample/aaa_Keys.txt"))
+    val keys = KeysBbParser().parseFile("${System.getProperty("user.dir")}/dataExample/test_Keys.txt")
+//    println(keys)
     println("Mouse clicks")
-    println(MouseClicksBbParser().parseFile("${System.getProperty("user.dir")}/dataExample/aaa_Mouse_Clicks.txt"))
+    val clicks = MouseClicksBbParser().parseFile("${System.getProperty("user.dir")}/dataExample/test_Mouse_Clicks.txt")
+//    println(clicks)
     println("Mouse moves")
-    println(MouseMovesBbParser().parseFile("${System.getProperty("user.dir")}/dataExample/aaa_Mouse_Moves.txt"))
+    val moves = MouseMovesBbParser().parseFile("${System.getProperty("user.dir")}/dataExample/test_Mouse_Moves.txt")
+//    println(moves)
     println("Reactions")
-    println(ReactionsBbParser().parseFile("${System.getProperty("user.dir")}/dataExample/aaa_Reactions.txt"))
+    val reactions = ReactionsBbParser().parseFile("${System.getProperty("user.dir")}/dataExample/test_Reactions.txt")
+//    println(reactions)
+
+    println("Got speeds")
+    KeysConverter().convert(keys).forEach {
+        println("${it.key.second - it.key.first} мс -- ${it.value} символов/минута")
+    }
 }

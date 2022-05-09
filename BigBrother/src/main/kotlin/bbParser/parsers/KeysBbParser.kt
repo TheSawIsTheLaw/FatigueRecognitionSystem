@@ -9,7 +9,7 @@ class KeysBbParser : BbParser(
             val strValues = line.split(',')
             KeyModel(
                 strValues[0].trim().removePrefix(Prefixes.KEY),
-                strValues[1].trim().removePrefix(Prefixes.TIMESTAMP)
+                strValues[1].trim().removePrefix(Prefixes.TIMESTAMP).toLong()
             )
         }
     }

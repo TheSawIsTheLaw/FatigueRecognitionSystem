@@ -10,7 +10,7 @@ class MouseMovesBbParser : BbParser(
             MousePositionModel(
                 strValues[0].trim().removePrefix(Prefixes.X_COORDINATE).toInt(),
                 strValues[1].trim().removePrefix(Prefixes.Y_COORDINATE).toInt(),
-                strValues[2].trim().removePrefix(Prefixes.TIMESTAMP)
+                strValues[2].trim().removePrefix(Prefixes.TIMESTAMP).toLong()
             )
         }
     }

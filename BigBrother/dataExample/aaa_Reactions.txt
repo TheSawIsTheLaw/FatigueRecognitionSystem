@@ -1,2 +1,0 @@
-reaction_time=469, timestamp=08/5/2022 15:07:38
-reaction_time=421, timestamp=08/5/2022 15:08:46

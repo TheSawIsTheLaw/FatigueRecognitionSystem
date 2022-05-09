@@ -9,7 +9,7 @@ class ReactionsBbParser : BbParser(
             val strValues = line.split(',')
             ReactionModel(
                 strValues[0].trim().removePrefix(Prefixes.REACTION).toInt(),
-                strValues[1].trim().removePrefix(Prefixes.TIMESTAMP)
+                strValues[1].trim().removePrefix(Prefixes.TIMESTAMP).toLong()
             )
         }
     }
