@@ -21,7 +21,9 @@ fun main() {
 //    println(reactions)
 
     println("Got speeds")
-    KeysConverter().convert(keys).forEach {
+    val converted = KeysConverter().convert(keys)
+    converted.forEach {
         println("${it.key.second - it.key.first} мс -- ${it.value} символов/минута")
     }
+    println(converted.size)
 }

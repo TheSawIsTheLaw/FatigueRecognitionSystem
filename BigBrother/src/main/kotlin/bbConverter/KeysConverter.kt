@@ -18,6 +18,7 @@ class KeysConverter : Converter {
         val map = hashMapOf<Pair<Long, Long>, Int>()
         if (checkIfListOfKeys(keys)) {
             val workKeys = (keys as List<KeyModel>).sortedBy { it.mTimestamp }
+            println(workKeys)
 //          way with checks in moments
 //            var beginTimestamp = keys.first().mTimestamp
 //            var passedKeys = 1
@@ -31,16 +32,18 @@ class KeysConverter : Converter {
 //                }
 //            }
 
-            var currentTimestamp = keys.first().mTimestamp
+            var currentTimestamp = workKeys.first().mTimestamp
             var passedKeys = 1
-            for (i in 1 until keys.size - 1) {
+            for (i in 1 until workKeys.size) {
                 passedKeys++
+//                println(SimpleDateFormat("mm:hh:ss.ms").format(workKeys[i].mTimestamp))
 //                println(workKeys[i].mKeyName)
 //                println("${workKeys[i + 1].mTimestamp} - $currentTimestamp = ${workKeys[i + 1].mTimestamp - currentTimestamp}")
-                if (workKeys[i + 1].mTimestamp - currentTimestamp > 1000 * 60) {
-                    map[Pair(currentTimestamp, workKeys[i].mTimestamp)] = passedKeys
+//                println(workKeys[i].mTimestamp - currentTimestamp)
+                if (workKeys[i].mTimestamp - currentTimestamp > 1000 * 60) {
+                    map[Pair(currentTimestamp, workKeys[i - 1].mTimestamp)] = passedKeys
                     passedKeys = 0
-                    currentTimestamp = keys[i + 1].mTimestamp
+                    currentTimestamp = workKeys[i].mTimestamp
                 }
             }
         }
