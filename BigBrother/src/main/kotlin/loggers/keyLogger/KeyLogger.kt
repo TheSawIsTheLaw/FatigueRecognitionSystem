@@ -26,7 +26,8 @@ class KeyLogger(username: String) : Logger, NativeKeyListener {
 
     override fun start() {
         try {
-            GlobalScreen.registerNativeHook()
+            if (!GlobalScreen.isNativeHookRegistered())
+                GlobalScreen.registerNativeHook()
         } catch (ex: NativeHookException) {
             System.err.println("There was a problem registering the native hook.")
             exitProcess(1)
@@ -49,7 +50,8 @@ class KeyLogger(username: String) : Logger, NativeKeyListener {
 
         GlobalScreen.removeNativeKeyListener(this)
         // Causes System.exit(1) on Arch and Mint :)
-        GlobalScreen.unregisterNativeHook()
+        if (GlobalScreen.isNativeHookRegistered() && System.getProperty("os.name") != "Linux")
+            GlobalScreen.unregisterNativeHook()
     }
 
     override fun nativeKeyPressed(e: NativeKeyEvent) {

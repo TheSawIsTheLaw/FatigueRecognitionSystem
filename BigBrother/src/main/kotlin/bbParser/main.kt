@@ -1,5 +1,6 @@
 package bbParser
 
+import bbConverter.ClicksConverter
 import bbConverter.KeysConverter
 import bbParser.parsers.KeysBbParser
 import bbParser.parsers.MouseClicksBbParser
@@ -20,10 +21,14 @@ fun main() {
     val reactions = ReactionsBbParser().parseFile("${System.getProperty("user.dir")}/dataExample/test_Reactions.txt")
 //    println(reactions)
 
-    println("Got speeds")
-    val converted = KeysConverter().convert(keys)
-    converted.forEach {
+    println("Got speeds for keys")
+    val convertedKeys = KeysConverter().convert(keys)
+    convertedKeys.forEach {
         println("${it.key.second - it.key.first} мс -- ${it.value} символов/минута")
     }
-    println(converted.size)
+
+    val convertedClicks = ClicksConverter().convert(clicks)
+    convertedClicks.forEach {
+        println("${it.key.second - it.key.first} мс -- ${it.value}")
+    }
 }

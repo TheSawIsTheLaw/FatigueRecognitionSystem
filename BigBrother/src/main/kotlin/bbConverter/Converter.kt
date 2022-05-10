@@ -5,7 +5,7 @@ import java.util.Date
 import kotlin.collections.HashMap
 
 interface Converter {
-    fun convert(models: List<Model>): HashMap<Pair<Long, Long>, Int>
+    fun convert(models: List<Model>): HashMap<Pair<Long, Long>, *>
 
     companion object Constants {
         const val MILLIS_IN_MINUTE = 1000 * 60

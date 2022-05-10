@@ -16,6 +16,7 @@ class MouseLogger(username: String) : Logger, NativeMouseInputListener {
 
     @Volatile
     private var mFileForMoves = File(mPathToFileForMoves)
+
     @Volatile
     private var mFileForClicks = File(mPathToFileForClicks)
 
@@ -36,7 +37,8 @@ class MouseLogger(username: String) : Logger, NativeMouseInputListener {
 
     override fun start() {
         try {
-            GlobalScreen.registerNativeHook()
+            if (!GlobalScreen.isNativeHookRegistered())
+                GlobalScreen.registerNativeHook()
         } catch (ex: NativeHookException) {
             System.err.println("There was a problem registering the native hook.")
             exitProcess(1)
@@ -49,9 +51,14 @@ class MouseLogger(username: String) : Logger, NativeMouseInputListener {
     }
 
     override fun stop() {
+        clearToFile(queueOfClicks, mFileForClicks)
+        clearToFile(queueOfMoves, mFileForMoves)
+
         GlobalScreen.removeNativeMouseListener(this)
+        GlobalScreen.removeNativeMouseMotionListener(this)
         // Causes System.exit(1) on Arch and Mint :)
-        GlobalScreen.unregisterNativeHook()
+        if (GlobalScreen.isNativeHookRegistered() && System.getProperty("os.name") != "Linux")
+            GlobalScreen.unregisterNativeHook()
     }
 
     override fun nativeMouseClicked(e: NativeMouseEvent?) {
