@@ -1,15 +1,12 @@
 package loggers.keyLogger
 
+import com.github.kwhat.jnativehook.GlobalScreen
+import com.github.kwhat.jnativehook.NativeHookException
+import com.github.kwhat.jnativehook.keyboard.NativeKeyEvent
 import loggers.Logger
-import org.jnativehook.GlobalScreen
-import org.jnativehook.NativeHookException
-import org.jnativehook.keyboard.NativeKeyEvent
-import org.jnativehook.keyboard.NativeKeyListener
+import com.github.kwhat.jnativehook.keyboard.NativeKeyListener
 import java.io.File
-import java.io.RandomAccessFile
 import java.util.LinkedList
-import java.util.Queue
-import kotlin.concurrent.thread
 import kotlin.system.exitProcess
 
 class KeyLogger(username: String) : Logger, NativeKeyListener {
@@ -49,9 +46,7 @@ class KeyLogger(username: String) : Logger, NativeKeyListener {
         clearQueue()
 
         GlobalScreen.removeNativeKeyListener(this)
-        // Causes System.exit(1) on Arch and Mint :)
-        if (GlobalScreen.isNativeHookRegistered() && System.getProperty("os.name") != "Linux")
-            GlobalScreen.unregisterNativeHook()
+        GlobalScreen.unregisterNativeHook()
     }
 
     override fun nativeKeyPressed(e: NativeKeyEvent) {

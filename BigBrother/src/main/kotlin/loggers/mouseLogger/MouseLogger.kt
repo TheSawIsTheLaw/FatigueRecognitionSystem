@@ -1,10 +1,10 @@
 package loggers.mouseLogger
 
+import com.github.kwhat.jnativehook.GlobalScreen
+import com.github.kwhat.jnativehook.NativeHookException
+import com.github.kwhat.jnativehook.mouse.NativeMouseEvent
+import com.github.kwhat.jnativehook.mouse.NativeMouseInputListener
 import loggers.Logger
-import org.jnativehook.GlobalScreen
-import org.jnativehook.NativeHookException
-import org.jnativehook.mouse.NativeMouseEvent
-import org.jnativehook.mouse.NativeMouseInputListener
 import java.io.File
 import java.util.*
 import kotlin.system.exitProcess
@@ -56,9 +56,7 @@ class MouseLogger(username: String) : Logger, NativeMouseInputListener {
 
         GlobalScreen.removeNativeMouseListener(this)
         GlobalScreen.removeNativeMouseMotionListener(this)
-        // Causes System.exit(1) on Arch and Mint :)
-        if (GlobalScreen.isNativeHookRegistered() && System.getProperty("os.name") != "Linux")
-            GlobalScreen.unregisterNativeHook()
+        GlobalScreen.unregisterNativeHook()
     }
 
     override fun nativeMouseClicked(e: NativeMouseEvent?) {
