@@ -20,7 +20,9 @@ class MouseLogger(username: String) : Logger, NativeMouseInputListener {
     @Volatile
     private var mFileForClicks = File(mPathToFileForClicks)
 
+    @Volatile
     private var queueOfMoves = LinkedList<String>()
+    @Volatile
     private var queueOfClicks = LinkedList<String>()
 
     private fun setFiles() {
