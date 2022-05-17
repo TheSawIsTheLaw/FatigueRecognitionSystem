@@ -68,28 +68,76 @@ OpenTSDB состоит из демона временных рядов, а та
 Модуль состоит из четырех пакетов.
 
 \paragraph{Пакет window}
-Данный пакет включает в себя абстрактный класс Window, предоставляющий родительский класс с определенными свойствами для всех окон реализуемого программного обеспечения.
+Данный пакет включает в себя абстрактный класс Window, предоставляющий родительский класс с определенными свойствами для всех окон реализуемого программного обеспечения. Реализация приведена в листинге \ref{lst:window}.
 
 \lstinputlisting[
-	caption={Файл window.kt},
+	caption={Файл Window.kt},
 	label={lst:window},
 	language=kotlin
 ]{../BigBrother/src/main/kotlin/window/window.kt}
 
 \paragraph{Пакет bigBrother}
-Данный пакет включает в себя класс BigBrotherWindow, который является реализацией класса Window и определяет функционал главного экрана приложения.
+Данный пакет включает в себя класс BigBrotherWindow, который является реализацией класса Window и определяет функционал главного экрана приложения. Реализация приведена в листинге \ref{lst:bigBrother}.
+
+\lstinputlisting[
+	caption={Файл BigBrother.kt},
+	label={lst:bigBrother},
+	language=kotlin
+]{../BigBrother/src/main/kotlin/bigBrother/BigBrotherWindow.kt}
 
 \paragraph{Пакет loggers}
-Данный пакет включает в себя пакеты реализаций логирующих классов: KeyLogger (нажатия на клавиши клавиатуры), MouseLogger (нажатия на клавиши мыши и движения данного устройства), ReactionLogger (результаты пройденных тестов на реакцию).
+Данный пакет включает в себя пакеты реализаций логирующих классов: KeyLogger (нажатия на клавиши клавиатуры), MouseLogger (нажатия на клавиши мыши и движения данного устройства), ReactionLogger (результаты пройденных тестов на реакцию). Реализация классов приведена в листингах \ref{lst:logger} -- \ref{lst:reactionLogger}
 
-Также в данном пакете предоставлена реализация класса ReactionTestWindow, предоставляющая интерфейс и логику определения реакции пользователя по нажатию на кнопку, появляющуюся в случайные моменты времени (от 2 до 10 секунд).
+\lstinputlisting[
+	caption={Файл Logger.kt},
+	label={lst:bigBrother},
+	language=kotlin
+]{../BigBrother/src/main/kotlin/loggers/Logger.kt}
+
+\lstinputlisting[
+	caption={Файл KeyLogger.kt},
+	label={lst:keyLogger},
+	language=kotlin
+]{../BigBrother/src/main/kotlin/loggers/keyLogger/KeyLogger.kt}
+
+\lstinputlisting[
+	caption={Файл MouseLogger.kt},
+	label={lst:mouseLogger},
+	language=kotlin
+]{../BigBrother/src/main/kotlin/loggers/mouseLogger/MouseLogger.kt}
+
+\lstinputlisting[
+	caption={Файл ReactionLogger.kt},
+	label={lst:reactionLogger},
+	language=kotlin
+]{../BigBrother/src/main/kotlin/loggers/reactionTest/ReactionLogger.kt}
+
+Также в данном пакете предоставлена реализация класса ReactionTestWindow, предоставляющая интерфейс и логику определения реакции пользователя по нажатию на кнопку, появляющуюся в случайные моменты времени (от 2 до 10 секунд). Код приведен в листинге \ref{lst:rectionWindow}.
+
+\lstinputlisting[
+	caption={Файл ReactionTestWindow.kt},
+	label={lst:reactionTestWindow},
+	language=kotlin
+]{../BigBrother/src/main/kotlin/loggers/reactionTest/reactionTestWindow.kt}
 
 Каждый логирующий класс локально создает текстовый файл, в который записывает в определенном формате собранные данные. Для исключения попыток изменения файла конкурирующими потоками в каждом из них представлена реализация очереди записи, которая переносится в файл при достижения размера в сотню записей, либо по завершению работы приложения.
 
 \paragraph{Пакет random}
-Данный пакет включает в себя класс, реализованного по паттерну ``Одиночка'', предоставляющий доступ к классу Random, инициализированного отложенно. Данный класс используется преимущественно для получения данных о реакции пользователя.
+Данный пакет включает в себя класс, реализованного по паттерну ``Одиночка'', предоставляющий доступ к классу Random, инициализированного отложено. Данный класс используется преимущественно для получения данных о реакции пользователя. Реализация класса представлена в листинге \ref{lst:random}.
 
-Также в модуле определен файл main.kt, который является точкой входа в приложения.
+\lstinputlisting[
+	caption={Файл BBRandom.kt},
+	label={lst:random},
+	language=kotlin
+]{../BigBrother/src/main/kotlin/random/BBRandom.kt}
+
+Также в модуле определен файл main.kt, который является точкой входа в приложения. Код файла представлен в листинге \ref{lst:main}.
+
+\lstinputlisting[
+	caption={Файл main.kt},
+	label={lst:main},
+	language=kotlin
+]{../BigBrother/src/main/kotlin/main.kt}
 
 На рисунке \ref{fig:loggingUml} предоставлена диаграмма классов модуля.
 \begin{figure}[H]
@@ -134,11 +182,59 @@ OpenTSDB состоит из демона временных рядов, а та
 
 \subsubsection{Модуль обработки данных}
 
-Модуль обработки данных включает в себя два пакета: парсинга данных и приведения данных.
+Модуль обработки данных включает в себя два пакета: синтаксического анализа данных и приведения данных.
 
-Модуль парсинга данных...
+Модуль синтаксического анализа данных предоставляет функции приведения записанных текстовых данных к определенным классам моделей данных.
 
-Модуль приведения данных...
+В листинге \ref{lst:model} представлена реализация абстрактного класса модели, в листинге \ref{lst:keyModel} --- пример конкретной модели.
+
+\lstinputlisting[
+	caption={Файл Model.kt},
+	label={lst:model},
+	language=kotlin
+]{../BigBrother/src/main/kotlin/bbParser/models/Model.kt}
+
+\lstinputlisting[
+	caption={Файл KeyModel.kt},
+	label={lst:keyModel},
+	language=kotlin
+]{../BigBrother/src/main/kotlin/bbParser/models/KeyModel.kt}
+
+В листинге \ref{lst:bbParser} представлена реализация абстрактного класса синтаксического анализатора. В листинге \ref{lst:keysBbParser} представлен пример конкретного анализатора.
+
+\lstinputlisting[
+	caption={Файл BbParser.kt},
+	label={lst:bbParser},
+	language=kotlin
+]{../BigBrother/src/main/kotlin/bbParser/parsers/BbParser.kt}
+
+\lstinputlisting[
+	caption={Файл KeysBbParser.kt},
+	label={lst:keysBbParser},
+	language=kotlin
+]{../BigBrother/src/main/kotlin/bbParser/parsers/KeysBbParser.kt}
+
+Модуль приведения данных отвечает за получение требуемых характеристик от полученных данных, например, скорости печати. В листинге \ref{lst:converter} представлена реализация абстрактного класса. В листинге \ref{lst:keysConverter} --- пример преобразователя.
+
+\lstinputlisting[
+	caption={Файл Converter.kt},
+	label={lst:converter},
+	language=kotlin
+]{../BigBrother/src/main/kotlin/bbConverter/Converter.kt}
+
+\lstinputlisting[
+	caption={Файл KeysConverter.kt},
+	label={lst:keysConverter},
+	language=kotlin
+]{../BigBrother/src/main/kotlin/bbConverter/KeysConverter.kt}
+
+На рисунке \ref{fig:processingUml} предоставлена диаграмма классов модуля.
+\begin{figure}[H]
+	\centering
+	\includegraphics[width=\textwidth]{img/processing.pdf}
+	\caption{Диаграмма классов модуля обработки данных.}
+	\label{fig:processingUml}
+\end{figure}
 
 \subsubsection{Модуль анализа данных}
 
