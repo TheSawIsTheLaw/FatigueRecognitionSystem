@@ -62,7 +62,7 @@ fun main() {
     println("Fuzzy clusters' centers:")
 
     val clusterer = FuzzyKMeansClusterer<ClusterPoint>(3, 5.0)
-    var toMakeCluster = mutableListOf<ClusterPoint>()
+    val toMakeCluster = mutableListOf<ClusterPoint>()
     reactions.forEach { reaction ->
         convertedKeys.entries.filter { filIt -> reaction.mTimestamp - filIt.key.first in (0..(10 * 1000 * 60)) }
             .sortedBy { it.key.first }.forEach { innerIt ->

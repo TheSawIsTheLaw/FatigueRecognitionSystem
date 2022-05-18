@@ -8,6 +8,10 @@ import kotlin.collections.HashMap
 @Suppress("UNCHECKED_CAST")
 class KeysConverter : Converter {
 
+    /**
+     *  Возвращает значения в виде:
+     *  "(время первого клика - время последнего клика) - количество введённых символов"
+     */
     override fun convert(keys: List<Model>): HashMap<Pair<Long, Long>, Int> {
         val out = hashMapOf<Pair<Long, Long>, Int>()
 
