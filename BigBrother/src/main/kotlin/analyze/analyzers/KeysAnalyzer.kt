@@ -1,7 +1,7 @@
 package analyze.analyzers
 
 import analyze.clusterization.KeysClusterer
-import analyze.model.FuzzyStatus
+import analyze.models.FuzzyStatus
 import bbConverter.KeysConverter
 import bbParser.models.Model
 import kotlin.math.abs

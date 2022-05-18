@@ -1,4 +1,4 @@
-package analyze.model
+package analyze.models
 
 
 data class FuzzyStatus(
