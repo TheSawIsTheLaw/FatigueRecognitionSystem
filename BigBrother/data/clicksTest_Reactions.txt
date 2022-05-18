@@ -1,0 +1,17 @@
+reaction_time=527, timestamp=1652874606023
+reaction_time=630, timestamp=1652875377917
+reaction_time=507, timestamp=1652875850429
+reaction_time=595, timestamp=1652876268924
+reaction_time=642, timestamp=1652876527506
+reaction_time=554, timestamp=1652883068273
+reaction_time=586, timestamp=1652883676672
+reaction_time=550, timestamp=1652884964308
+reaction_time=681, timestamp=1652885879811
+reaction_time=546, timestamp=1652887365125
+reaction_time=550, timestamp=1652890645804
+reaction_time=620, timestamp=1652892903645
+reaction_time=572, timestamp=1652894109600
+reaction_time=527, timestamp=1652907387856
+reaction_time=595, timestamp=1652907926262
+reaction_time=523, timestamp=1652908563410
+reaction_time=622, timestamp=1652909599128
