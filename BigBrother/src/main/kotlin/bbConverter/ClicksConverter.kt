@@ -2,13 +2,13 @@ package bbConverter
 
 import bbParser.models.Model
 import bbParser.models.MouseClickModel
-import kotlin.math.abs
+import kotlin.math.sqrt
 
 @Suppress("UNCHECKED_CAST")
 class ClicksConverter : Converter {
 
-    override fun convert(clicks: List<Model>): HashMap<Pair<Long, Long>, Pair<Int, Int>> {
-        val out = HashMap<Pair<Long, Long>, Pair<Int, Int>>()
+    override fun convert(clicks: List<Model>): HashMap<Pair<Long, Long>, Int> {
+        val out = HashMap<Pair<Long, Long>, Int>()
 
         val sortedClicks = (clicks as List<MouseClickModel>).sortedBy { it.mTimestamp }
 
@@ -17,10 +17,13 @@ class ClicksConverter : Converter {
         for (i in 1 until sortedClicks.size) {
             prevClick = sortedClicks[i - 1]
             curClick = sortedClicks[i]
-            out[Pair(prevClick.mTimestamp, curClick.mTimestamp)] = Pair(
-                abs(curClick.mXCoordinate - prevClick.mXCoordinate),
-                abs(curClick.mYCoordinate - prevClick.mYCoordinate)
-            )
+            out[Pair(prevClick.mTimestamp, curClick.mTimestamp)] =
+                sqrt(
+                    ((curClick.mXCoordinate - prevClick.mXCoordinate) *
+                            (curClick.mXCoordinate - prevClick.mXCoordinate) +
+                            (curClick.mYCoordinate - prevClick.mYCoordinate) *
+                            (curClick.mYCoordinate - prevClick.mYCoordinate)).toDouble()
+                ).toInt()
         }
 
         return out

@@ -1,6 +1,5 @@
 package bbConverter
 
-import bbConverter.Converter.Constants.MILLIS_IN_MINUTE
 import bbParser.models.KeyModel
 import bbParser.models.Model
 import kotlin.collections.HashMap
@@ -21,7 +20,7 @@ class KeysConverter : Converter {
         var passedKeys = 1
         for (i in 1 until sortedKeys.size) {
             passedKeys++
-            if (sortedKeys[i].mTimestamp - currentTimestamp > MILLIS_IN_MINUTE) {
+            if (sortedKeys[i].mTimestamp - currentTimestamp > Converter.MILLIS_IN_MINUTE) {
                 out[Pair(currentTimestamp, sortedKeys[i - 1].mTimestamp)] = passedKeys
                 passedKeys = 1
                 currentTimestamp = sortedKeys[i].mTimestamp
