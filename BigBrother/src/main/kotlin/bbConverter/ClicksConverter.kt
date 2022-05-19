@@ -7,6 +7,10 @@ import kotlin.math.sqrt
 @Suppress("UNCHECKED_CAST")
 class ClicksConverter : Converter {
 
+    /**
+     *  Возвращает значения в виде:
+     *  "(время первого клика - время последнего клика) - пройденное расстояние в пикселях"
+     */
     override fun convert(clicks: List<Model>): HashMap<Pair<Long, Long>, Int> {
         val out = HashMap<Pair<Long, Long>, Int>()
 
