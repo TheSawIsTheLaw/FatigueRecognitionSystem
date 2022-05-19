@@ -1,4 +1,4 @@
-package fileAnalyzer
+package analyze.fileAnalyzer
 
 import analyze.analyzers.Analyzer
 import bbParser.parsers.BbParser

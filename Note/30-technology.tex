@@ -58,7 +58,7 @@ OpenTSDB состоит из демона временных рядов, а та
 \subsubsection{Модуль логирования действий оператора}
 Данный модуль предназначен для записи информации о действиях оператора.
 
-Внешние зависимости модуля:
+Библиотеки, используемые в модуле:
 
 \begin{itemize}[leftmargin=1.6\parindent]
 \item Java Swing \cite{swing} --- библиотека легковесных компонентов для реализации оконного интерфейса приложения;
@@ -86,7 +86,7 @@ OpenTSDB состоит из демона временных рядов, а та
 ]{../BigBrother/src/main/kotlin/bigBrother/BigBrotherWindow.kt}
 
 \paragraph{Пакет loggers \newline}
-Данный пакет включает в себя пакеты реализаций логирующих классов: KeyLogger (нажатия на клавиши клавиатуры), MouseLogger (нажатия на клавиши мыши и движения данного устройства), ReactionLogger (результаты пройденных тестов на реакцию). Реализация классов приведена в листингах \ref{lst:logger} -- \ref{lst:reactionLogger}
+Данный пакет включает в себя пакеты реализаций логирующих классов: KeyLogger (нажатия на клавиши клавиатуры), MouseLogger (нажатия на клавиши мыши и движения данного устройства), ReactionLogger (результаты пройденных тестов на реакцию). Реализация классов приведена в листингах \ref{lst:bigBrother} -- \ref{lst:reactionLogger}
 
 \lstinputlisting[
 	caption={Файл Logger.kt},
@@ -123,7 +123,7 @@ OpenTSDB состоит из демона временных рядов, а та
 Каждый логирующий класс локально создает текстовый файл, в который записывает в определенном формате собранные данные. Для исключения попыток изменения файла конкурирующими потоками в каждом из них представлена реализация очереди записи, которая переносится в файл при достижения размера в сотню записей, либо по завершению работы приложения.
 
 \paragraph{Пакет random \newline}
-Данный пакет включает в себя класс, реализованного по паттерну ``Одиночка'', предоставляющий доступ к классу Random, инициализированного отложено. Данный класс используется преимущественно для получения данных о реакции пользователя. Реализация класса представлена в листинге \ref{lst:random}.
+Данный пакет включает в себя класс, реализованный по паттерну ``Одиночка'', предоставляющий доступ к классу Random, инициализированного отложено. Данный класс используется преимущественно для получения данных о реакции пользователя. Реализация класса представлена в листинге \ref{lst:random}.
 
 \lstinputlisting[
 	caption={Файл BBRandom.kt},
@@ -247,7 +247,65 @@ OpenTSDB состоит из демона временных рядов, а та
 \end{figure}
 
 \subsubsection{Модуль анализа данных}
+Данный модуль предназначен для анализа поступающих от оператора данных: кластеризации данных для модели и непосредственно текущей оценки усталости оператора.
 
+Единственной библиотекой, используемой в модуле является The Commons Mathematics Library \cite{apachemath3}, из которой была взята реализация алгоритма кластеризации ``с-средних''.
+
+\paragraph{Пакет analyze.clusterization \newline}
+
+Данный пакет включает в себя утилиты для кластеризации данных, в нем представлен абстрактный класс Clusterer и его реализация BbClusterer, предоставляющий возможность определения нечетких кластеров по переданным данным. Также в пакете приведен класс точки для кластеризации, используемая библиотекой The Commons Mathematics Library. Реализация приведена в листингах \ref{lst:Clusterer} --- \ref{lst:BbClusterer}.
+
+\lstinputlisting[
+	caption={Файл Clusterer.kt},
+	label={lst:Clusterer},
+	language=kotlin
+]{../BigBrother/src/main/kotlin/analyze/clusterization/Clusterer.kt}
+
+\lstinputlisting[
+	caption={Файл ClusterPoint.kt},
+	label={lst:ClusterPoint},
+	language=kotlin
+]{../BigBrother/src/main/kotlin/analyze/clusterization/ClusterPoint.kt}
+
+\lstinputlisting[
+	caption={Файл BbClusterer.kt},
+	label={lst:BbClusterer},
+	language=kotlin
+]{../BigBrother/src/main/kotlin/analyze/clusterization/BbClusterer.kt}
+
+\paragraph{Пакет analyze.analyzers}
+
+Данный пакет включает в себя анализаторы, позволяющие построить модель и оценивать состояние оператора с использованием различных способов предоставления данных. В листингах \ref{lst:Analyzer} и \ref{lst:BbAnalyzer} предоставлены абстрактный класс анализатора и его реализация для работы с файлами.
+
+\lstinputlisting[
+	caption={Файл Analyzer.kt},
+	label={lst:Analyzer},
+	language=kotlin
+]{../BigBrother/src/main/kotlin/analyze/analyzers/Analyzer.kt}
+
+\lstinputlisting[
+	caption={Файл BbAnalyzer.kt},
+	label={lst:BbAnalyzer},
+	language=kotlin
+]{../BigBrother/src/main/kotlin/analyze/analyzers/BbAnalyzer.kt}
+
+\paragraph{Пакет analyze.fileAnalyzer}
+Данный пакет предоставляет реализацию класса, позволяющего полноценно создать модель по заданным файлам и определить состояния оператора. Реализация представлена в листинге \ref{lst:BbFileAnalyzer}.
+
+\lstinputlisting[
+	caption={Файл BbFileAnalyzer.kt},
+	label={lst:BbFileAnalyzer},
+	language=kotlin
+]{../BigBrother/src/main/kotlin/analyze/fileAnalyzer/BbFileAnalyzer.kt}
+
+На рисунке \ref{fig:analyzerUml} предоставлена диаграмма классов модуля.
+
+\begin{figure}[H]
+	\centering
+	\includegraphics[width=\textwidth]{img/analyze.pdf}
+	\caption{Диаграмма классов модуля анализа данных.}
+	\label{fig:analyzerUml}
+\end{figure}
 
 \subsection{Развертывание системы}
 

@@ -3,7 +3,6 @@ package analyze.clusterization
 import bbConverter.Converter
 import bbParser.models.Model
 import bbParser.models.ReactionModel
-import dateFormat.DateFormatter
 
 class BbClusterer(converter: Converter, k: Int = 3, fuzziness: Double = 5.0) : Clusterer(converter, k, fuzziness) {
 

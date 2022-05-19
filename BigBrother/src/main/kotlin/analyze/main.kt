@@ -4,7 +4,7 @@ import analyze.analyzers.BbAnalyzer
 import bbConverter.KeysConverter
 import bbParser.parsers.KeysBbParser
 import bbParser.parsers.ReactionsBbParser
-import fileAnalyzer.BbFileAnalyzer
+import analyze.fileAnalyzer.BbFileAnalyzer
 
 fun main() {
 
