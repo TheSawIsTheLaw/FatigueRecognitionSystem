@@ -1,0 +1,5 @@
+{
+  "influxdbURL": "http://localhost:8086",
+  "influxdbAdminToken": "qWxhYMJ8CpYyhi8Q9ArYyRK3L6Tyk0lZG8BhXr5Ok-HONjUv8T1_yWhHHB5bQVKHebjcD9pcsTvW3KuA_eoBCQ==",
+  "influxdbOrganization": "subjects"
+}

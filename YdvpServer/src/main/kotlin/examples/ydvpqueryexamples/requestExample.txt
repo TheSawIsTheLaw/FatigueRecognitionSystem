@@ -1,0 +1,4 @@
+GET /user/pulse YDVP/0.1
+Host: 127.0.0.1
+
+username=testuser

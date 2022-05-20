@@ -22,6 +22,7 @@ class MouseLogger(username: String) : Logger, NativeMouseInputListener {
 
     @Volatile
     private var queueOfMoves = LinkedList<String>()
+
     @Volatile
     private var queueOfClicks = LinkedList<String>()
 
@@ -56,9 +57,12 @@ class MouseLogger(username: String) : Logger, NativeMouseInputListener {
         clearToFile(queueOfClicks, mFileForClicks)
         clearToFile(queueOfMoves, mFileForMoves)
 
-        GlobalScreen.removeNativeMouseListener(this)
-        GlobalScreen.removeNativeMouseMotionListener(this)
-        GlobalScreen.unregisterNativeHook()
+        try {
+            GlobalScreen.removeNativeMouseListener(this)
+            GlobalScreen.removeNativeMouseMotionListener(this)
+            GlobalScreen.unregisterNativeHook()
+        } catch (e: Exception) {
+        }
     }
 
     override fun nativeMouseClicked(e: NativeMouseEvent?) {
