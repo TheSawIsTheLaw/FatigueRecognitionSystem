@@ -129,6 +129,38 @@
 	tabsize=4
 }
 
+% plot
+\usepackage{pgfplots}
+\usepackage{filecontents}
+\usetikzlibrary{datavisualization}
+\usetikzlibrary{datavisualization.formats.functions}
+
+\begin{filecontents}{postgres.dat}
+10000 188
+12000 248
+14000 274
+16000 261
+18000 266
+20000 284
+22000 316
+24000 340
+26000 363
+28000 410
+\end{filecontents}
+
+\begin{filecontents}{influx.dat}
+10000 64
+12000 65
+14000 60
+16000 60
+18000 61
+20000 68
+22000 76
+24000 65
+26000 65
+28000 67
+\end{filecontents}
+
 \newcommand{\code}[1]{\texttt{#1}}
 
 \usepackage{ulem} % Нормальное нижнее подчеркивание
