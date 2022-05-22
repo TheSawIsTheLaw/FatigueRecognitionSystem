@@ -12,7 +12,7 @@
 
 \subsection{Сравнение времени исполнения запросов в базы данных Postgres и InfluxDB с использованием языка программирования Kotlin}
 
-\subsubsection{Средства проведения стресс-тестирования базы данных InfluxDB}
+\subsubsection{Средства проведения стресс-тестирования баз данных}
 
 InfluxDB inch tool \cite{inchTool} --- это средство симуляции потоковой передачи данных в InfluxDB для определения производительности системы.
 
@@ -119,7 +119,7 @@ N_R = H \cdot M_R \cdot 60 + M \cdot M_R,
 
 Для исследования в базе данных Postgres были созданы таблица пользователей и таблица, содержащая данные о нажатых клавишах клавиатуры.
 
-В качестве средств доступа к базам данных использовались решения: PostgreSQL JDBC Driver \cite{jdbc} и InfluxDB Client Kotlin. Замеры производились с использованием утилиты measureTimeMillis \cite{measureTimeMillis}.
+В качестве средств доступа к базам данных использовались решения: JDBC Driver PostgreSQL\cite{jdbc} и InfluxDB Client Kotlin. Замеры производились с использованием утилиты measureTimeMillis \cite{measureTimeMillis}.
 
 \subsubsection*{Вывод}
 
