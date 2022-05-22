@@ -1,14 +1,12 @@
 %----------------------- Преамбула -----------------------
 \usepackage{extsizes} % Для добавления в параметры класса документа 14pt
 
+\usepackage{extsizes} % Для добавления в параметры класса документа 14pt
+
 % Для работы с несколькими языками и шрифтом Times New Roman по-умолчанию
-\usepackage{cmap}
 \usepackage[english,russian]{babel}
 \usepackage{fontspec}
 \setmainfont{Times New Roman}
-\usepackage{xecyr}
-
-\usepackage{float}
 
 % ГОСТовские настройки для полей и абзацев
 \usepackage[left=30mm,right=10mm,top=20mm,bottom=20mm]{geometry}
@@ -48,18 +46,17 @@
 {\bfseries\normalsize}{\thesubsubsection}{1em}{}
 \titlespacing\subsubsection{\parindent}{\parskip}{\parskip}
 
-% Работа с изображениями и таблицами; переопределение названий по ГОСТу
 \usepackage{float}
 \usepackage{setspace}
 \onehalfspacing % Полуторный интервал
-\frenchspacing
+
+% Работа с изображениями и таблицами; переопределение названий по ГОСТу
 \usepackage{caption}
-\usepackage{indentfirst} % Красная строка
 \usepackage{titlesec}
 \titleformat{\chapter}{\LARGE\bfseries}{\thechapter}{20pt}{\LARGE\bfseries}
 \titleformat{\section}{\centering\Large\bfseries}{\thesection.\quad}{20pt}{\Large\bfseries}
 \usepackage{listings}
-
+\usepackage[utf8x]{inputenc}  
 % Выравнивание "где" по ГОСТу для формул
 \usepackage{eqexpl}
 
@@ -79,7 +76,7 @@
 \hypersetup{
 	linktoc=all,
 	linkcolor=black,
-	colorlinks=true,
+	colorlinks=false,
 }
 
 % Листинги
@@ -118,6 +115,7 @@
 	breaklines=true,
 	commentstyle=\color{black},
 	frame=single,
+	linewidth=\textwidth,
 	keywordstyle=\color{black}\bfseries,
 	numbers=left,
 	numbersep=5pt,
@@ -170,6 +168,9 @@
 \makeatletter
 \renewcommand\@biblabel[1]{#1.}
 \makeatother
+
+\captionsetup[figure]{name={Рисунок},labelsep=endash}
+\captionsetup[table]{singlelinecheck=false, labelsep=endash}
 
 \usepackage{color}
 \usepackage[cache=false, newfloat]{minted}
