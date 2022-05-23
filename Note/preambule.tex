@@ -54,7 +54,7 @@
 \usepackage{caption}
 \usepackage{titlesec}
 \titleformat{\chapter}{\LARGE\bfseries}{\thechapter}{20pt}{\LARGE\bfseries}
-\titleformat{\section}{\centering\Large\bfseries}{\thesection.\quad}{20pt}{\Large\bfseries}
+\titleformat{\section}{\centering\Large\bfseries}{\thesection}{20pt}{\Large\bfseries}
 \usepackage{listings}
 \usepackage[utf8x]{inputenc}  
 % Выравнивание "где" по ГОСТу для формул
@@ -119,6 +119,8 @@
 	keywordstyle=\color{black}\bfseries,
 	numbers=left,
 	numbersep=5pt,
+	framexleftmargin=30pt,
+	xleftmargin=30pt,
 	numberstyle=\small\ttfamily\color{black},
 	showstringspaces=false,
 	stringstyle=\color{black},
@@ -173,7 +175,6 @@
 \captionsetup[table]{singlelinecheck=false, labelsep=endash}
 
 \usepackage{color}
-\usepackage[cache=false, newfloat]{minted}
 
 \usepackage{amsmath}
 \usepackage{slashbox}
