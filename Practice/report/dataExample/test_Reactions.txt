@@ -1,0 +1,7 @@
+reaction_time=469, timestamp=1652608078478
+reaction_time=605, timestamp=1652608755005
+reaction_time=650, timestamp=1652609334098
+reaction_time=533, timestamp=1652609985075
+reaction_time=532, timestamp=1652610952773
+reaction_time=541, timestamp=1652611677458
+reaction_time=596, timestamp=1652612561080
